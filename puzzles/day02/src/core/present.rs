@@ -20,6 +20,10 @@ fn perimeter(dimensions: &Dimensions2) -> Size {
 pub struct Present(Dimensions3);
 
 impl Present {
+    pub fn new(length: Size, width: Size, height: Size) -> Self {
+        Self::from([length, width, height])
+    }
+
     pub fn length(&self) -> Size {
         self.0[0]
     }
@@ -70,12 +74,6 @@ impl Present {
 impl From<Dimensions3> for Present {
     fn from(dimensions: Dimensions3) -> Self {
         Self(dimensions)
-    }
-}
-
-impl From<Present> for Dimensions3 {
-    fn from(present: Present) -> Self {
-        present.0
     }
 }
 
