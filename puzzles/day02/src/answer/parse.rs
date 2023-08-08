@@ -26,13 +26,19 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 
 #[cfg(test)]
 mod tests {
-    use aoc::Input;
-
-    const INPUT: Input = include_str!("../../input.txt");
+    use crate::core::Present;
 
     #[test]
-    fn parse() -> anyhow::Result<()> {
-        dbg!(super::parse(INPUT)?);
-        Ok(())
+    fn parse() {
+        macro_rules! test {
+            ($input:expr, $expected:expr) => {
+                assert_eq!(
+                    super::parse($input).unwrap(),
+                    $expected.into_iter().map(Present::from).collect::<Vec<_>>()
+                );
+            };
+        }
+
+        test!("2x3x4\n1x1x10\n", [[2, 3, 4], [1, 1, 10]]);
     }
 }

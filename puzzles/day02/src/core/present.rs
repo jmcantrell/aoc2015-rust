@@ -2,78 +2,57 @@ use std::convert::TryFrom;
 
 use anyhow::Context;
 
-type Size = usize;
-type Vector2<T> = [T; 2];
-type Vector3<T> = [T; 3];
-type Dimensions2 = Vector2<Size>;
-type Dimensions3 = Vector3<Size>;
-
-fn area(dimensions: &Dimensions2) -> Size {
-    dimensions[0] * dimensions[1]
-}
-
-fn perimeter(dimensions: &Dimensions2) -> Size {
-    2 * (dimensions[0] + dimensions[1])
-}
+use super::{Dimensions2, Dimensions3, Size};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Present(Dimensions3);
 
 impl Present {
     pub fn new(length: Size, width: Size, height: Size) -> Self {
-        Self::from([length, width, height])
+        Dimensions3::new(length, width, height).into()
     }
 
-    pub fn length(&self) -> Size {
-        self.0[0]
+    fn sides(&self) -> nalgebra::Vector3<Dimensions2> {
+        [self.0.xy(), self.0.yz(), self.0.xz()].into()
     }
 
-    pub fn width(&self) -> Size {
-        self.0[1]
-    }
-
-    pub fn height(&self) -> Size {
-        self.0[2]
-    }
-
-    fn sides(&self) -> Vector3<Dimensions2> {
-        [
-            [self.length(), self.width()],
-            [self.width(), self.height()],
-            [self.height(), self.length()],
-        ]
-    }
-
-    pub fn surface_area(&self) -> Size {
+    fn surface_area(&self) -> Size {
         self.sides()
-            .iter()
-            .map(|dimensions| 2 * area(dimensions))
+            .into_iter()
+            .map(|&side| 2 * side.product())
             .sum()
     }
 
-    pub fn volume(&self) -> Size {
-        self.0.into_iter().product()
+    fn volume(&self) -> Size {
+        self.0.product()
     }
 
-    pub fn smallest_side(&self) -> Dimensions2 {
+    fn smallest_side(&self) -> Dimensions2 {
         self.sides()
             .into_iter()
-            .min_by(|a, b| area(a).cmp(&area(b)))
+            .min_by(|&&a, &&b| a.product().cmp(&b.product()))
+            .cloned()
             .unwrap()
     }
 
     pub fn wrapping_paper_surface_area(&self) -> Size {
-        self.surface_area() + area(&self.smallest_side())
+        self.surface_area() + self.smallest_side().product()
     }
 
     pub fn ribbon_length(&self) -> Size {
-        self.volume() + perimeter(&self.smallest_side())
+        self.volume() + 2 * self.smallest_side().sum()
     }
 }
 
 impl From<Dimensions3> for Present {
     fn from(dimensions: Dimensions3) -> Self {
         Self(dimensions)
+    }
+}
+
+impl From<[Size; 3]> for Present {
+    fn from(dimensions: [Size; 3]) -> Self {
+        Dimensions3::from(dimensions).into()
     }
 }
 
@@ -87,7 +66,7 @@ impl TryFrom<&str> for Present {
         let width = tokens.next().context("missing width")?.parse()?;
         let height = tokens.next().context("missing height")?.parse()?;
 
-        Ok(Self([length, width, height]))
+        Ok(Self::new(length, width, height))
     }
 }
 
@@ -101,7 +80,7 @@ mod tests {
             ($input:expr, [$length:expr, $width:expr, $height:expr]) => {
                 assert_eq!(
                     Present::try_from($input).unwrap(),
-                    Present::from([$length, $width, $height])
+                    Present::new($length, $width, $height)
                 );
             };
         }
