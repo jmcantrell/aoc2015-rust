@@ -36,7 +36,7 @@ impl Present {
         self.0[2]
     }
 
-    pub fn sides(&self) -> Vector3<Dimensions2> {
+    fn sides(&self) -> Vector3<Dimensions2> {
         [
             [self.length(), self.width()],
             [self.width(), self.height()],
