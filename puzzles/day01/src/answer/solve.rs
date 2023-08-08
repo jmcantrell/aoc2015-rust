@@ -1,27 +1,20 @@
-use crate::core::Visitor;
+use anyhow::Context;
 
 use super::{Parsed1, Parsed2};
 
 pub type Solution1 = isize;
-pub type Solution2 = Option<usize>;
+pub type Solution2 = usize;
 
 pub fn solve1(parsed: &Parsed1) -> anyhow::Result<Solution1> {
-    let mut santa = Visitor::new();
-    for dir in parsed {
-        santa.step_vertically(dir);
-    }
-    Ok(santa.current_floor())
+    parsed.iter().last().context("instructions have no steps")
 }
 
 pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
-    let mut santa = Visitor::new();
-    for (i, dir) in parsed.iter().enumerate() {
-        santa.step_vertically(dir);
-        if santa.current_floor() < 0 {
-            return Ok(Some(i + 1));
-        }
-    }
-    Ok(None)
+    parsed
+        .iter()
+        .position(|floor| floor < 0)
+        .context("santa never enters basement")
+        .map(|i| i + 1)
 }
 
 #[cfg(test)]
@@ -35,6 +28,7 @@ pub mod tests {
                 assert_eq!(super::solve1(&parse1($input)?)?, $expected);
             };
         }
+
         test!("(())", 0);
         test!("()()", 0);
         test!("(((", 3);
@@ -44,6 +38,7 @@ pub mod tests {
         test!("))(", -1);
         test!(")))", -3);
         test!(")())())", -3);
+
         Ok(())
     }
 
@@ -54,9 +49,10 @@ pub mod tests {
                 assert_eq!(super::solve2(&parse2($input)?)?, $expected);
             };
         }
-        test!("(", None);
-        test!(")", Some(1));
-        test!("()())", Some(5));
+
+        test!(")", 1);
+        test!("()())", 5);
+
         Ok(())
     }
 }

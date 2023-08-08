@@ -19,3 +19,20 @@ impl TryFrom<char> for Direction {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn try_from() {
+        macro_rules! test {
+            ($input:expr, $expected:expr) => {
+                assert_eq!(Direction::try_from($input).unwrap(), $expected);
+            };
+        }
+
+        test!('(', Direction::Up);
+        test!(')', Direction::Down);
+    }
+}
