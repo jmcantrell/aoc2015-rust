@@ -4,7 +4,7 @@ use aoc::Input;
 
 use crate::core::Direction;
 
-pub type Parsed = Vec<Direction>;
+type Parsed = Vec<Direction>;
 pub type Parsed1 = Parsed;
 pub type Parsed2 = Parsed;
 
