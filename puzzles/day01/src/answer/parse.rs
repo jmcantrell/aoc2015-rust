@@ -1,13 +1,19 @@
+use anyhow::Context;
+
 use aoc::Input;
 
-use crate::core::Instructions;
+use crate::core::Direction;
 
-type Parsed = Instructions;
+type Parsed = Vec<Direction>;
 pub type Parsed1 = Parsed;
 pub type Parsed2 = Parsed;
 
 fn parse(input: Input) -> anyhow::Result<Parsed> {
-    input.try_into()
+    input
+        .chars()
+        .enumerate()
+        .map(|(i, c)| c.try_into().context(format!("direction number {}", i + 1)))
+        .collect::<Result<Vec<_>, _>>()
 }
 
 pub fn parse1(input: Input) -> anyhow::Result<Parsed1> {
@@ -20,13 +26,26 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 
 #[cfg(test)]
 mod tests {
-    use aoc::Input;
-
-    const INPUT: Input = include_str!("../../input.txt");
+    use crate::core::Direction::*;
 
     #[test]
-    fn parse() -> anyhow::Result<()> {
-        dbg!(super::parse(INPUT)?);
-        Ok(())
+    fn parse() {
+        macro_rules! test {
+            ($input:expr, $expected:expr) => {
+                assert_eq!(super::parse($input).unwrap(), Vec::from($expected));
+            };
+        }
+
+        test!(")", [Down]);
+        test!("()())", [Up, Down, Up, Down, Down]);
+        test!("(())", [Up, Up, Down, Down]);
+        test!("()()", [Up, Down, Up, Down]);
+        test!("(((", [Up, Up, Up]);
+        test!("(()(()(", [Up, Up, Down, Up, Up, Down, Up]);
+        test!("))(((((", [Down, Down, Up, Up, Up, Up, Up]);
+        test!("())", [Up, Down, Down]);
+        test!("))(", [Down, Down, Up]);
+        test!(")))", [Down, Down, Down]);
+        test!(")())())", [Down, Up, Down, Down, Up, Down, Down]);
     }
 }
