@@ -20,12 +20,12 @@ pub enum Direction {
 }
 
 impl Direction {
-    pub fn offset(&self) -> Offset {
+    pub fn offset(&self) -> &Offset {
         match self {
-            North => NORTH_OFFSET,
-            South => SOUTH_OFFSET,
-            East => EAST_OFFSET,
-            West => WEST_OFFSET,
+            North => &NORTH_OFFSET,
+            South => &SOUTH_OFFSET,
+            East => &EAST_OFFSET,
+            West => &WEST_OFFSET,
         }
     }
 }

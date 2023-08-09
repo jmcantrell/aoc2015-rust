@@ -1,6 +1,6 @@
 use super::{Direction, Floor};
 
-pub fn iter_floor(directions: &[Direction]) -> impl Iterator<Item = Floor> + '_ {
+pub fn iter_floors(directions: &[Direction]) -> impl Iterator<Item = Floor> + '_ {
     let mut floor = 0;
 
     directions.iter().map(move |direction| {
@@ -17,11 +17,11 @@ pub mod tests {
     use crate::core::Direction::*;
 
     #[test]
-    fn iter_floor() {
+    fn iter_floors() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::iter_floor(&Vec::from($input)).collect::<Vec<_>>(),
+                    super::iter_floors(&Vec::from($input)).collect::<Vec<_>>(),
                     Vec::from($expected)
                 );
             };

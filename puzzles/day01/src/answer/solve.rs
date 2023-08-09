@@ -1,6 +1,6 @@
 use anyhow::Context;
 
-use crate::core::iter_floor;
+use crate::core::iter_floors;
 
 use super::{Parsed1, Parsed2};
 
@@ -8,13 +8,13 @@ pub type Solution1 = isize;
 pub type Solution2 = usize;
 
 pub fn solve1(parsed: &Parsed1) -> anyhow::Result<Solution1> {
-    iter_floor(parsed)
+    iter_floors(parsed)
         .last()
         .context("instructions have no steps")
 }
 
 pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
-    iter_floor(parsed)
+    iter_floors(parsed)
         .position(|floor| floor < 0)
         .context("santa never enters basement")
         .map(|i| i + 1)
