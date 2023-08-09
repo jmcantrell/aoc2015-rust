@@ -1,7 +1,5 @@
-pub type Floor = isize;
-
 pub mod direction;
 pub use direction::*;
 
-pub mod building;
-pub use building::*;
+pub mod floor;
+pub use floor::*;

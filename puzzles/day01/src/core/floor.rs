@@ -1,4 +1,6 @@
-use super::{Direction, Floor};
+use super::Direction;
+
+pub type Floor = isize;
 
 pub fn iter_floors(directions: &[Direction]) -> impl Iterator<Item = Floor> + '_ {
     let mut floor = 0;
