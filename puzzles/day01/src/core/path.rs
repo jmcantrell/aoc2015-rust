@@ -1,11 +1,13 @@
-use super::Direction;
+use super::{Direction, Location};
 
-pub type Floor = isize;
-
-pub fn iter_floors(directions: &[Direction]) -> impl Iterator<Item = Floor> + '_ {
+pub fn iter_path<'a, I>(directions: I) -> impl Iterator<Item = Location> + 'a
+where
+    I: IntoIterator<Item = &'a Direction>,
+    I::IntoIter: 'a,
+{
     let mut floor = 0;
 
-    directions.iter().map(move |direction| {
+    directions.into_iter().map(move |direction| {
         floor += match direction {
             Direction::Up => 1,
             Direction::Down => -1,
@@ -19,11 +21,11 @@ pub mod tests {
     use crate::core::Direction::*;
 
     #[test]
-    fn iter_floors() {
+    fn iter_path() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::iter_floors(&Vec::from($input)).collect::<Vec<_>>(),
+                    super::iter_path(&Vec::from($input)).collect::<Vec<_>>(),
                     Vec::from($expected)
                 );
             };

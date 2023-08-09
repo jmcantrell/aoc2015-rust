@@ -1,5 +1,7 @@
+pub type Location = isize;
+
 pub mod direction;
 pub use direction::*;
 
-pub mod floor;
-pub use floor::*;
+pub mod path;
+pub use path::*;
