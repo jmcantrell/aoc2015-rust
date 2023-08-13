@@ -17,27 +17,33 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 
 #[cfg(test)]
 pub mod tests {
-    use crate::answer::{parse1, parse2};
+    use crate::core::Present;
 
     #[test]
     fn solve1() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::solve1(&parse1($input).unwrap()).unwrap(), $expected);
+                assert_eq!(
+                    super::solve1(&$input.into_iter().map(Present::from).collect()).unwrap(),
+                    $expected
+                );
             };
         }
 
-        test!("2x3x4\n1x1x10\n", 58 + 43);
+        test!([[2, 3, 4], [1, 1, 10]], 58 + 43);
     }
 
     #[test]
     fn solve2() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::solve2(&parse2($input).unwrap()).unwrap(), $expected);
+                assert_eq!(
+                    super::solve2(&$input.into_iter().map(Present::from).collect()).unwrap(),
+                    $expected
+                );
             };
         }
 
-        test!("2x3x4\n1x1x10\n", 34 + 14);
+        test!([[2, 3, 4], [1, 1, 10]], 34 + 14);
     }
 }

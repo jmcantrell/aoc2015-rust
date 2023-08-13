@@ -1,4 +1,4 @@
-use crate::core::{better_is_nice, ridiculous_is_nice};
+use crate::core::{better, ridiculous};
 
 use super::{Parsed1, Parsed2};
 
@@ -7,11 +7,11 @@ pub type Solution1 = Solution;
 pub type Solution2 = Solution;
 
 pub fn solve1(parsed: &Parsed1) -> anyhow::Result<Solution1> {
-    Ok(parsed.iter().filter(|&s| ridiculous_is_nice(s)).count())
+    Ok(parsed.iter().filter(|&s| ridiculous::is_nice(s)).count())
 }
 
 pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
-    Ok(parsed.iter().filter(|&s| better_is_nice(s)).count())
+    Ok(parsed.iter().filter(|&s| better::is_nice(s)).count())
 }
 
 #[cfg(test)]

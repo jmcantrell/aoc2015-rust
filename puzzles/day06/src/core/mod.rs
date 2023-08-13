@@ -1,4 +1,4 @@
-pub type Location = (usize, usize);
+pub type Location = nalgebra::Point2<usize>;
 pub type BoolGrid = nalgebra::DMatrix<bool>;
 pub type UintGrid = nalgebra::DMatrix<usize>;
 

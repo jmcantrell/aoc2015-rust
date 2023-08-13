@@ -8,9 +8,9 @@ pub struct Rectangle {
 
 impl Rectangle {
     pub fn new(top_left: Location, bottom_right: Location) -> Self {
-        assert!(top_left.0 <= bottom_right.0, "top row is after bottom row");
+        assert!(top_left.y <= bottom_right.y, "top row is after bottom row");
         assert!(
-            top_left.1 <= bottom_right.1,
+            top_left.x <= bottom_right.x,
             "left column is after right column"
         );
 
@@ -21,8 +21,8 @@ impl Rectangle {
     }
 
     pub fn iter(&self) -> impl Iterator<Item = Location> + '_ {
-        (self.top_left.0..=self.bottom_right.0).flat_map(|row| {
-            (self.top_left.1..=self.bottom_right.1).map(move |column| [row, column].into())
+        (self.top_left.y..=self.bottom_right.y).flat_map(|row| {
+            (self.top_left.x..=self.bottom_right.x).map(move |column| [row, column].into())
         })
     }
 }

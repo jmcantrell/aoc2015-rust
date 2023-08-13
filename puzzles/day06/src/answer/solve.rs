@@ -11,10 +11,12 @@ pub fn solve1(parsed: &Parsed1) -> anyhow::Result<Solution1> {
 
     for command in parsed {
         for location in command.rectangle.iter() {
-            grid[location] = match command.action {
+            let value = &mut grid[(location.y, location.x)];
+
+            *value = match command.action {
                 Action::TurnOn => true,
                 Action::TurnOff => false,
-                Action::Toggle => !grid[location],
+                Action::Toggle => !*value,
             };
         }
     }
@@ -27,21 +29,19 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 
     for command in parsed {
         for location in command.rectangle.iter() {
-            let mut brightness = grid[location];
+            let brightness = &mut grid[(location.y, location.x)];
 
             match command.action {
                 Action::TurnOn => {
-                    brightness += 1;
+                    *brightness += 1;
                 }
                 Action::TurnOff => {
-                    brightness = brightness.saturating_sub(1);
+                    *brightness = brightness.saturating_sub(1);
                 }
                 Action::Toggle => {
-                    brightness += 2;
+                    *brightness += 2;
                 }
             }
-
-            grid[location] = brightness;
         }
     }
 

@@ -52,9 +52,9 @@ mod tests {
         test!(
             input,
             [
-                (TurnOn, [0, 1], [2, 3]),
-                (TurnOff, [1, 2], [3, 4]),
-                (Toggle, [2, 3], [4, 5])
+                (TurnOn, [1, 0], [3, 2]),
+                (TurnOff, [2, 1], [4, 3]),
+                (Toggle, [3, 2], [5, 4])
             ]
         );
     }

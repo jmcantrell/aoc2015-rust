@@ -6,11 +6,6 @@ use super::Offset;
 
 use Direction::*;
 
-const NORTH_OFFSET: Offset = Offset::new(0, 1);
-const SOUTH_OFFSET: Offset = Offset::new(0, -1);
-const EAST_OFFSET: Offset = Offset::new(1, 0);
-const WEST_OFFSET: Offset = Offset::new(-1, 0);
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Direction {
     North,
@@ -20,12 +15,12 @@ pub enum Direction {
 }
 
 impl Direction {
-    pub fn offset(&self) -> &Offset {
+    pub fn offset(&self) -> Offset {
         match self {
-            North => &NORTH_OFFSET,
-            South => &SOUTH_OFFSET,
-            East => &EAST_OFFSET,
-            West => &WEST_OFFSET,
+            North => Offset::new(0, 1),
+            South => Offset::new(0, -1),
+            East => Offset::new(1, 0),
+            West => Offset::new(-1, 0),
         }
     }
 }

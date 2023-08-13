@@ -28,7 +28,7 @@ impl TryFrom<&str> for Command {
 
             ensure!(tokens.next().is_none(), "unexpected trailing characters",);
 
-            Ok(Location::from([row, column]))
+            Ok(Location::from([column, row]))
         }
 
         fn rsplit_once_whitespace(s: &str) -> Option<(&str, &str)> {
@@ -78,8 +78,8 @@ mod tests {
             };
         }
 
-        test!("turn on 0,1 through 2,3", TurnOn, [0, 1], [2, 3]);
-        test!("turn off 1,2 through 3,4", TurnOff, [1, 2], [3, 4]);
-        test!("toggle 2,3 through 4,5", Toggle, [2, 3], [4, 5]);
+        test!("turn on 0,1 through 2,3", TurnOn, [1, 0], [3, 2]);
+        test!("turn off 1,2 through 3,4", TurnOff, [2, 1], [4, 3]);
+        test!("toggle 2,3 through 4,5", Toggle, [3, 2], [5, 4]);
     }
 }
