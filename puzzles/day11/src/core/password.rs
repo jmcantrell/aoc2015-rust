@@ -1,4 +1,4 @@
-use anyhow::{bail, ensure};
+use anyhow::ensure;
 
 use std::convert::TryFrom;
 
@@ -54,13 +54,12 @@ impl TryFrom<&str> for Password {
         let chars: Vec<_> = s.chars().collect();
 
         for (i, c) in chars.iter().enumerate() {
-            if !(c.is_alphabetic() && c.is_lowercase()) {
-                bail!(
-                    "character number {} is not a lowercase letter: {:?}",
-                    i + 1,
-                    c
-                );
-            }
+            ensure!(
+                c.is_ascii_lowercase(),
+                "character number {} is not a lowercase letter: {:?}",
+                i + 1,
+                c
+            );
         }
 
         Ok(Self(chars))
@@ -95,9 +94,9 @@ impl Iterator for PasswordIter {
 
     fn next(&mut self) -> Option<Self::Item> {
         for current in self.0.iter_mut().rev() {
-            let (next, carry) = next_char(*current);
+            let (next, wrapped) = next_char(*current);
             *current = next;
-            if !carry {
+            if !wrapped {
                 break;
             }
         }

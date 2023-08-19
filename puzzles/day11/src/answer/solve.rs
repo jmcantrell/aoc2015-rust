@@ -14,7 +14,7 @@ fn iter_valid_passwords(start: &Password) -> impl Iterator<Item = Password> {
     let letters: Vec<_> = ('a'..='z').collect();
     let straights: HashSet<_> = letters.windows(3).map(|window| window.to_vec()).collect();
     let confusing: HashSet<_> = ['i', 'o', 'l'].into_iter().collect();
-    let pairs: HashSet<_> = letters.iter().map(|&c| [c, c]).collect();
+    let pairs: Vec<_> = letters.iter().map(|&c| [c, c]).collect();
 
     let mut passwords = start.iter();
 
@@ -36,7 +36,7 @@ fn iter_valid_passwords(start: &Password) -> impl Iterator<Item = Password> {
 
         if pairs
             .iter()
-            .filter(|pair| password.as_ref().windows(2).any(|window| &window == pair))
+            .filter(|&pair| password.as_ref().windows(2).any(|window| window == pair))
             .take(2)
             .count()
             < 2
