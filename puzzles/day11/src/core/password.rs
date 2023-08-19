@@ -83,7 +83,7 @@ impl PasswordIter {
         Self(password.into())
     }
 
-    pub fn advance_index(&mut self, i: usize) {
+    pub fn skip_letter_at(&mut self, i: usize) {
         for j in (i + 1)..self.0.len() {
             self.0[j] = 'z';
         }

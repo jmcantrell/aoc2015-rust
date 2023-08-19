@@ -22,7 +22,7 @@ fn iter_valid_passwords(start: &Password) -> impl Iterator<Item = Password> {
         let password = passwords.next().unwrap();
 
         if let Some(i) = password.chars().position(|c| confusing.contains(c)) {
-            passwords.advance_index(i);
+            passwords.skip_letter_at(i);
             continue;
         }
 
