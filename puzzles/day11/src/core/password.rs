@@ -78,28 +78,14 @@ fn next_char(c: char) -> (char, bool) {
     }
 }
 
-fn increment_letters(letters: &mut Inner, at: usize) {
-    let at = at.clamp(0, letters.len());
-
-    for i in (0..=at).rev() {
-        let current = letters.get_mut(i).unwrap();
-        let (next, carry) = next_char(*current);
-        *current = next;
-        if !carry {
-            break;
-        }
-    }
-}
-
 impl PasswordIter {
     pub fn after(password: Password) -> Self {
         Self(password.into())
     }
 
     pub fn advance_index(&mut self, i: usize) {
-        increment_letters(&mut self.0, i);
         for j in (i + 1)..self.0.len() {
-            self.0[j] = 'a';
+            self.0[j] = 'z';
         }
     }
 }
@@ -108,8 +94,13 @@ impl Iterator for PasswordIter {
     type Item = Password;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let i = self.0.len() - 1;
-        increment_letters(&mut self.0, i);
+        for current in self.0.iter_mut().rev() {
+            let (next, carry) = next_char(*current);
+            *current = next;
+            if !carry {
+                break;
+            }
+        }
         Some(Password(self.0.clone()))
     }
 }
