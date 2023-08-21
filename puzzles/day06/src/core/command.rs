@@ -65,7 +65,7 @@ mod tests {
     use Action::*;
 
     #[test]
-    fn try_from() {
+    fn try_from_str() {
         macro_rules! test {
             ($input:expr, $action:expr, $top_left:expr, $bottom_right:expr) => {
                 assert_eq!(

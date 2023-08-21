@@ -29,7 +29,7 @@ mod tests {
     use Action::*;
 
     #[test]
-    fn try_from() {
+    fn try_from_str() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(Action::try_from($input).unwrap(), $expected);
