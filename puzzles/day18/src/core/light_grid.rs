@@ -146,7 +146,7 @@ impl TryFrom<&str> for LightGrid {
             cells.len()
         );
 
-        let inner = Inner::from_row_iterator(height, width, cells.into_iter());
+        let inner = Inner::from_row_iterator(height, width, cells);
 
         Ok(Self(inner))
     }

@@ -9,14 +9,14 @@ pub type Solution1 = Solution;
 pub type Solution2 = Solution;
 
 pub fn solve1(parsed: &Parsed1) -> anyhow::Result<Solution1> {
-    let map = Map::from_iter(parsed.clone().into_iter());
+    let map = Map::from_iter(parsed.clone());
     let (path, distance) = map.shortest_path().context("no paths")?;
     dbg!(path);
     Ok(distance)
 }
 
 pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
-    let map = Map::from_iter(parsed.clone().into_iter());
+    let map = Map::from_iter(parsed.clone());
     let (path, distance) = map.longest_path().context("no paths")?;
     dbg!(path);
     Ok(distance)
