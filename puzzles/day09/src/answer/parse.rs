@@ -26,7 +26,7 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     input
         .lines()
         .enumerate()
-        .map(|(i, s)| parse_route(s).context(format!("route number {}", i + 1)))
+        .map(|(i, s)| parse_route(s).with_context(|| format!("route number {}", i + 1)))
         .collect::<Result<Vec<_>, _>>()
 }
 

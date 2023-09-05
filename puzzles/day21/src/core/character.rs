@@ -45,7 +45,7 @@ impl TryFrom<&str> for Character {
         let mut map: HashMap<&str, Value> = s
             .lines()
             .enumerate()
-            .map(|(i, s)| parse_mapping(s).context(format!("mapping number {}", i + 1)))
+            .map(|(i, s)| parse_mapping(s).with_context(|| format!("mapping number {}", i + 1)))
             .collect::<Result<_, _>>()?;
 
         let hit_points: Value = map.remove("Hit Points").context("missing hit points")?;

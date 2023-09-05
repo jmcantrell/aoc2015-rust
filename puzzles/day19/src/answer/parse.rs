@@ -22,7 +22,7 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     let pairs = top
         .lines()
         .enumerate()
-        .map(|(i, s)| parse_pair(s).context(format!("pair number {}", i + 1)))
+        .map(|(i, s)| parse_pair(s).with_context(|| format!("pair number {}", i + 1)))
         .collect::<Result<Vec<_>, _>>()?;
 
     let medicine = bottom.trim();

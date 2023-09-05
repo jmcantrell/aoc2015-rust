@@ -16,7 +16,7 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
 
         let index = prefix
             .strip_prefix(PREFIX_TAG)
-            .context(format!("expected prefix to start with {:?}", PREFIX_TAG))?;
+            .with_context(|| format!("expected prefix to start with {:?}", PREFIX_TAG))?;
 
         let index: usize = index.trim().parse()?;
 
@@ -35,7 +35,7 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     input
         .lines()
         .enumerate()
-        .map(|(i, s)| parse_sue(i, s).context(format!("line number {}", i + 1)))
+        .map(|(i, s)| parse_sue(i, s).with_context(|| format!("line number {}", i + 1)))
         .collect::<Result<Vec<_>, _>>()
 }
 

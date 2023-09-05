@@ -36,7 +36,7 @@ impl TryFrom<&str> for Boss {
         let mut map: HashMap<_, _> = s
             .lines()
             .enumerate()
-            .map(|(i, s)| parse_mapping(s).context(format!("line number {}", i + 1)))
+            .map(|(i, s)| parse_mapping(s).with_context(|| format!("line number {}", i + 1)))
             .collect::<Result<_, _>>()?;
 
         let hit_points = map

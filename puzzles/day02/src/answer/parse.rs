@@ -12,7 +12,10 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     input
         .lines()
         .enumerate()
-        .map(|(i, s)| s.try_into().context(format!("present number {}", i + 1)))
+        .map(|(i, s)| {
+            s.try_into()
+                .with_context(|| format!("present number {}", i + 1))
+        })
         .collect()
 }
 

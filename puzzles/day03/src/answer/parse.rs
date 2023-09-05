@@ -12,7 +12,10 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     input
         .chars()
         .enumerate()
-        .map(|(i, c)| c.try_into().context(format!("direction number {}", i + 1)))
+        .map(|(i, c)| {
+            c.try_into()
+                .with_context(|| format!("direction number {}", i + 1))
+        })
         .collect::<Result<Vec<_>, _>>()
 }
 

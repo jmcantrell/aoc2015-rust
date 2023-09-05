@@ -50,7 +50,7 @@ impl<'a> TryFrom<&'a str> for Potentials<'a> {
         fn parse_neighbors(s: &str) -> anyhow::Result<(&str, Happiness, &str)> {
             let captures = RE
                 .captures(s)
-                .context(format!("expected input to match: {:?}", RE.as_str()))?;
+                .with_context(|| format!("expected input to match: {:?}", RE.as_str()))?;
 
             let person = captures.name("person").unwrap().as_str();
             let sign = if &captures["sign"] == "gain" { 1 } else { -1 };
@@ -64,7 +64,7 @@ impl<'a> TryFrom<&'a str> for Potentials<'a> {
 
         for (i, s) in s.lines().enumerate() {
             let (person, change, neighbor) =
-                parse_neighbors(s).context(format!("line number {}", i + 1))?;
+                parse_neighbors(s).with_context(|| format!("line number {}", i + 1))?;
             inner.entry(person).or_default().insert(neighbor, change);
         }
 

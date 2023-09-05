@@ -12,7 +12,7 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     input
         .lines()
         .enumerate()
-        .map(|(i, s)| s.parse().context(format!("line number {}", i + 1)))
+        .map(|(i, s)| s.parse().with_context(|| format!("line number {}", i + 1)))
         .collect::<Result<Vec<_>, _>>()
 }
 

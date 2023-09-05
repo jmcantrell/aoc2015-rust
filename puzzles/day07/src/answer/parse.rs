@@ -18,7 +18,7 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     input
         .lines()
         .enumerate()
-        .map(|(i, s)| parse_part(s).context(format!("part number {}", i + 1)))
+        .map(|(i, s)| parse_part(s).with_context(|| format!("part number {}", i + 1)))
         .collect::<Result<Circuit, _>>()
 }
 

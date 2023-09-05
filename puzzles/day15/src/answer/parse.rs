@@ -24,7 +24,7 @@ fn parse(input: Input) -> anyhow::Result<Parsed> {
     input
         .lines()
         .enumerate()
-        .map(|(i, s)| parse_ingredient(s).context(format!("line number {}", i + 1)))
+        .map(|(i, s)| parse_ingredient(s).with_context(|| format!("line number {}", i + 1)))
         .collect::<Result<HashMap<_, _>, _>>()
 }
 

@@ -131,11 +131,8 @@ impl TryFrom<&str> for LightGrid {
         let cells = lines
             .flat_map(|(i, s)| {
                 s.chars().enumerate().map(move |(j, c)| {
-                    parse_light(c).context(format!(
-                        "line number {}, column number {}",
-                        i + 1,
-                        j + 1
-                    ))
+                    parse_light(c)
+                        .with_context(|| format!("line number {}, column number {}", i + 1, j + 1))
                 })
             })
             .collect::<Result<Vec<_>, _>>()?;

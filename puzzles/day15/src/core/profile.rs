@@ -81,13 +81,13 @@ impl TryFrom<&str> for Profile {
         let mut mapping = s
             .split(',')
             .enumerate()
-            .map(|(i, s)| parse_property(s).context(format!("property number {}", i + 1)))
+            .map(|(i, s)| parse_property(s).with_context(|| format!("property number {}", i + 1)))
             .collect::<Result<HashMap<_, _>, _>>()?;
 
         let mut take_value = |name: &str| -> anyhow::Result<isize> {
             mapping
                 .remove(name)
-                .context(format!("missing {:?} property", name))
+                .with_context(|| format!("missing {:?} property", name))
         };
 
         let capacity = take_value("capacity")?;

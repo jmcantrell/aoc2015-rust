@@ -42,7 +42,7 @@ impl<'a> TryFrom<&'a str> for Reindeer<'a> {
     fn try_from(s: &'a str) -> Result<Self, Self::Error> {
         let captures = RE
             .captures(s)
-            .context(format!("expected input to match: {:?}", RE.as_str()))?;
+            .with_context(|| format!("expected input to match: {:?}", RE.as_str()))?;
 
         let name = captures.name("name").unwrap().as_str();
         let top_speed = captures["top_speed"].parse()?;

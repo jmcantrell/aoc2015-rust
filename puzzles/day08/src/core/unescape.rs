@@ -23,18 +23,24 @@ pub fn unescape(s: &str) -> anyhow::Result<String> {
                             value.push(c);
                         }
                         'x' => {
-                            let digits = s.get(i + 1..i + 3).context(format!(
-                                "expected at least two characters after character number {}",
-                                i + 1,
-                            ))?;
-                            let n = u32::from_str_radix(digits, 16).context(format!(
-                                "expected two hexadecimal digits after character number {}",
-                                i + 1,
-                            ))?;
-                            let c = char::from_u32(n).context(format!(
+                            let digits = s.get(i + 1..i + 3).with_context(|| {
+                                format!(
+                                    "expected at least two characters after character number {}",
+                                    i + 1,
+                                )
+                            })?;
+                            let n = u32::from_str_radix(digits, 16).with_context(|| {
+                                format!(
+                                    "expected two hexadecimal digits after character number {}",
+                                    i + 1,
+                                )
+                            })?;
+                            let c = char::from_u32(n).with_context(|| {
+                                format!(
                                     "invalid hexadecimal escape sequence starting at character number {}",
                                     i + 1
-                                ))?;
+                                )
+                            })?;
                             chars.next();
                             chars.next();
                             value.push(c);

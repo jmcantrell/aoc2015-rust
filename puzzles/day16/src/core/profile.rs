@@ -45,7 +45,7 @@ impl TryFrom<&str> for Profile {
         let inner = s
             .split(',')
             .enumerate()
-            .map(|(i, s)| parse_mapping(s).context(format!("mapping number {}", i + 1)))
+            .map(|(i, s)| parse_mapping(s).with_context(|| format!("mapping number {}", i + 1)))
             .collect::<Result<HashMap<_, _>, _>>()?;
 
         Ok(Self(inner))
