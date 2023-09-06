@@ -72,12 +72,15 @@ mod tests {
 
     #[test]
     fn example() {
-        let mut program = Program::new(&[
-            Instruction::Increment(0),
-            Instruction::JumpIfOne(0, 2),
-            Instruction::Triple(0),
-            Instruction::Increment(0),
-        ]);
+        let mut program = Program::with_registers(
+            &[
+                Instruction::Increment(0),
+                Instruction::JumpIfOne(0, 2),
+                Instruction::Triple(0),
+                Instruction::Increment(0),
+            ],
+            [0, 0],
+        );
 
         assert_eq!(program.next(), Some([1, 0]));
         assert_eq!(program.next(), Some([1, 0]));
