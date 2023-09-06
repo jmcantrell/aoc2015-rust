@@ -7,7 +7,7 @@ use itertools::Itertools;
 pub fn iter_partitions(n: usize, k: usize) -> impl Iterator<Item = Vec<usize>> {
     (1..=n + k - 1).combinations(k - 1).map(move |c| {
         once(0)
-            .chain(c.clone().into_iter())
+            .chain(c.clone())
             .zip(c.into_iter().chain(once(n + k)))
             .map(|(a, b)| b - a - 1)
             .collect::<Vec<_>>()
