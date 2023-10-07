@@ -19,7 +19,7 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 }
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     use crate::core::Direction::*;
 
     #[test]

@@ -11,7 +11,7 @@ pub fn find_salt(secret_key: &[u8], prefix_len: usize) -> Option<Salt> {
 }
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     #[test]
     fn find_salt() {
         macro_rules! test {

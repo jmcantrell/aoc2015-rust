@@ -40,7 +40,7 @@ pub fn is_nice(s: &str) -> bool {
 }
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     #[test]
     fn is_nice() {
         macro_rules! assert_nice {

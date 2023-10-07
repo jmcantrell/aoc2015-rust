@@ -17,7 +17,7 @@ pub fn solve2(weights: &Parsed2) -> anyhow::Result<Solution2> {
 }
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     use aoc::Input;
 
     use crate::answer::{parse1, parse2};
