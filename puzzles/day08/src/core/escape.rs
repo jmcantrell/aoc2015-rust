@@ -20,11 +20,13 @@ pub fn escape(s: &str) -> anyhow::Result<String> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn unescape() {
+    fn test_unescape() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::escape($input).unwrap(), $expected);
+                assert_eq!(escape($input).unwrap(), $expected);
             };
         }
 

@@ -52,14 +52,16 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 mod tests {
     use crate::core::{Action, Command, Rectangle};
 
+    use super::*;
+
     use Action::*;
 
     #[test]
-    fn solve1() {
+    fn test_solve1() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::solve1(
+                    solve1(
                         &$input
                             .into_iter()
                             .map(|(action, top_left, bottom_right)| {
@@ -87,11 +89,11 @@ mod tests {
     }
 
     #[test]
-    fn solve2() {
+    fn test_solve2() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::solve2(
+                    solve2(
                         &$input
                             .into_iter()
                             .map(|(action, top_left, bottom_right)| {

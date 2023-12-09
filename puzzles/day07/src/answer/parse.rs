@@ -32,8 +32,10 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn parse() -> anyhow::Result<()> {
+    fn test_parse() -> anyhow::Result<()> {
         let input = concat!(
             "123 -> x\n",
             "456 -> y\n",
@@ -45,7 +47,7 @@ mod tests {
             "NOT y -> i\n",
         );
 
-        dbg!(super::parse(input)?);
+        dbg!(parse(input)?);
 
         Ok(())
     }

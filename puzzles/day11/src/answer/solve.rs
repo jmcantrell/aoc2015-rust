@@ -66,12 +66,14 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 mod tests {
     use crate::core::Password;
 
+    use super::*;
+
     #[test]
-    fn iter_valid_passwords() {
+    fn test_iter_valid_passwords() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::iter_valid_passwords(&Password::try_from($input).unwrap())
+                    iter_valid_passwords(&Password::try_from($input).unwrap())
                         .next()
                         .unwrap()
                         .to_string(),

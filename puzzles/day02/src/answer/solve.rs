@@ -19,12 +19,14 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 mod tests {
     use crate::core::Present;
 
+    use super::*;
+
     #[test]
-    fn solve1() {
+    fn test_solve1() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::solve1(&$input.into_iter().map(Present::from).collect()).unwrap(),
+                    solve1(&$input.into_iter().map(Present::from).collect()).unwrap(),
                     $expected
                 );
             };
@@ -34,11 +36,11 @@ mod tests {
     }
 
     #[test]
-    fn solve2() {
+    fn test_solve2() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::solve2(&$input.into_iter().map(Present::from).collect()).unwrap(),
+                    solve2(&$input.into_iter().map(Present::from).collect()).unwrap(),
                     $expected
                 );
             };

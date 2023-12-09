@@ -65,7 +65,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn eval_wire() {
+    fn test_eval_wire() {
         let mut circuit = Circuit::new();
 
         macro_rules! connect {

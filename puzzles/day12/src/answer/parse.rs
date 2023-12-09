@@ -20,11 +20,13 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn parse1() -> anyhow::Result<()> {
+    fn test_parse1() -> anyhow::Result<()> {
         macro_rules! test {
             ($input:expr) => {
-                dbg!(super::parse1($input)?);
+                dbg!(parse1($input)?);
             };
         }
 
@@ -41,10 +43,10 @@ mod tests {
     }
 
     #[test]
-    fn parse2() -> anyhow::Result<()> {
+    fn test_parse2() -> anyhow::Result<()> {
         macro_rules! test {
             ($input:expr) => {
-                dbg!(super::parse2($input)?);
+                dbg!(parse2($input)?);
             };
         }
 

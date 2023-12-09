@@ -39,15 +39,15 @@ impl Potentials<'_> {
     }
 }
 
-static RE: Lazy<Regex> = lazy_regex!(
-    r"^(?<person>\S+) would (?<sign>gain|lose) (?<change>\d+) happiness units by sitting next to (?<neighbor>\S+)\.$"
-);
-
 impl<'a> TryFrom<&'a str> for Potentials<'a> {
     type Error = anyhow::Error;
 
     fn try_from(s: &'a str) -> Result<Self, Self::Error> {
         fn parse_neighbors(s: &str) -> anyhow::Result<(&str, Happiness, &str)> {
+            static RE: Lazy<Regex> = lazy_regex!(
+                r"^(?<person>\S+) would (?<sign>gain|lose) (?<change>\d+) happiness units by sitting next to (?<neighbor>\S+)\.$"
+            );
+
             let captures = RE
                 .captures(s)
                 .with_context(|| format!("expected input to match: {:?}", RE.as_str()))?;

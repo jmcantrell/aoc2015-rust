@@ -111,7 +111,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn try_from_str() {
+    fn test_try_from_str() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(Profile::try_from($input).unwrap(), $expected);
@@ -131,7 +131,7 @@ mod tests {
     }
 
     #[test]
-    fn add_self() {
+    fn test_add_self() {
         assert_eq!(
             Profile {
                 capacity: -1,
@@ -157,7 +157,7 @@ mod tests {
     }
 
     #[test]
-    fn mul_usize() {
+    fn test_mul_usize() {
         assert_eq!(
             Profile {
                 capacity: -1,
@@ -177,7 +177,7 @@ mod tests {
     }
 
     #[test]
-    fn score() {
+    fn test_score() {
         assert_eq!(
             (Profile {
                 capacity: -1,
@@ -199,7 +199,7 @@ mod tests {
     }
 
     #[test]
-    fn sum_self() {
+    fn test_sum_self() {
         let a = Profile {
             capacity: -1,
             durability: -2,

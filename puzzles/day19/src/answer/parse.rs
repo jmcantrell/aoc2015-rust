@@ -42,6 +42,8 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 mod tests {
     use aoc::Input;
 
+    use super::*;
+
     const INPUT1A: Input = include_str!("../../input-test1a.txt");
     const INPUT1B: Input = include_str!("../../input-test1b.txt");
 
@@ -49,16 +51,16 @@ mod tests {
     const INPUT2B: Input = include_str!("../../input-test2b.txt");
 
     #[test]
-    fn parse1() -> anyhow::Result<()> {
-        dbg!(super::parse1(INPUT1A)?);
-        dbg!(super::parse1(INPUT1B)?);
+    fn test_parse1() -> anyhow::Result<()> {
+        dbg!(parse1(INPUT1A)?);
+        dbg!(parse1(INPUT1B)?);
         Ok(())
     }
 
     #[test]
-    fn parse2() -> anyhow::Result<()> {
-        dbg!(super::parse2(INPUT2A)?);
-        dbg!(super::parse2(INPUT2B)?);
+    fn test_parse2() -> anyhow::Result<()> {
+        dbg!(parse2(INPUT2A)?);
+        dbg!(parse2(INPUT2B)?);
         Ok(())
     }
 }

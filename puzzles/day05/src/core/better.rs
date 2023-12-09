@@ -41,17 +41,19 @@ pub fn is_nice(s: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn is_nice() {
+    fn test_is_nice() {
         macro_rules! assert_nice {
             ($input:expr) => {
-                assert!(super::is_nice($input));
+                assert!(is_nice($input));
             };
         }
 
         macro_rules! assert_naughty {
             ($input:expr) => {
-                assert!(!super::is_nice($input));
+                assert!(!is_nice($input));
             };
         }
 

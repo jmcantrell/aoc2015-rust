@@ -22,13 +22,17 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 
 #[cfg(test)]
 mod tests {
-    use crate::core::Direction::*;
+    use crate::core::Direction;
+
+    use super::*;
+
+    use Direction::*;
 
     #[test]
-    fn solve1() {
+    fn test_solve1() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::solve1(&Vec::from($input)).unwrap(), $expected);
+                assert_eq!(solve1(&Vec::from($input)).unwrap(), $expected);
             };
         }
 
@@ -44,10 +48,10 @@ mod tests {
     }
 
     #[test]
-    fn solve2() {
+    fn test_solve2() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::solve2(&Vec::from($input)).unwrap(), $expected);
+                assert_eq!(solve2(&Vec::from($input)).unwrap(), $expected);
             };
         }
 

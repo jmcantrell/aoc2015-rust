@@ -32,14 +32,14 @@ impl<'a> Reindeer<'a> {
     }
 }
 
-static RE: Lazy<Regex> = lazy_regex!(
-    r"^(?<name>\S+) can fly (?<top_speed>\d+) km/s for (?<fly_duration>\d+) seconds, but then must rest for (?<rest_duration>\d+) seconds\."
-);
-
 impl<'a> TryFrom<&'a str> for Reindeer<'a> {
     type Error = anyhow::Error;
 
     fn try_from(s: &'a str) -> Result<Self, Self::Error> {
+        static RE: Lazy<Regex> = lazy_regex!(
+            r"^(?<name>\S+) can fly (?<top_speed>\d+) km/s for (?<fly_duration>\d+) seconds, but then must rest for (?<rest_duration>\d+) seconds\."
+        );
+
         let captures = RE
             .captures(s)
             .with_context(|| format!("expected input to match: {:?}", RE.as_str()))?;
@@ -63,7 +63,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn distance_traveled_after() {
+    fn test_distance_traveled_after() {
         macro_rules! test {
             ($name:expr, $speed:expr, $fly:expr, $rest:expr, $duration:expr, $expected:expr) => {
                 assert_eq!(

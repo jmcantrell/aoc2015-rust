@@ -17,14 +17,16 @@ where
 mod tests {
     use crate::core::{Direction, Location};
 
+    use super::*;
+
     use Direction::*;
 
     #[test]
-    fn iter_path() {
+    fn test_iter_path() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::iter_path(&$input).collect::<Vec<_>>(),
+                    iter_path(&$input).collect::<Vec<_>>(),
                     $expected
                         .into_iter()
                         .map(Location::from)

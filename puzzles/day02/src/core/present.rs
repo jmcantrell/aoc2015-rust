@@ -75,7 +75,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn try_from_str() {
+    fn test_try_from_str() {
         macro_rules! test {
             ($input:expr, [$length:expr, $width:expr, $height:expr]) => {
                 assert_eq!(
@@ -90,7 +90,7 @@ mod tests {
     }
 
     #[test]
-    fn wrapping_paper_surface_area() {
+    fn test_wrapping_paper_surface_area() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
@@ -107,7 +107,7 @@ mod tests {
     }
 
     #[test]
-    fn ribbon_length() {
+    fn test_ribbon_length() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(

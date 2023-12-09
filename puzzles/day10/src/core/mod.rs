@@ -31,11 +31,13 @@ pub fn iter_look_and_say(mut s: String) -> impl Iterator<Item = String> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn look_and_say() {
+    fn test_look_and_say() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::look_and_say($input), $expected);
+                assert_eq!(look_and_say($input), $expected);
             };
         }
 
@@ -47,9 +49,9 @@ mod tests {
     }
 
     #[test]
-    fn iter_look_and_say() {
+    fn test_iter_look_and_say() {
         assert_eq!(
-            super::iter_look_and_say("1".to_owned()).nth(4),
+            iter_look_and_say("1".to_owned()).nth(4),
             Some("312211".to_owned())
         );
     }

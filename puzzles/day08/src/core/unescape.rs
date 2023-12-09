@@ -75,11 +75,13 @@ pub fn unescape(s: &str) -> anyhow::Result<String> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn unescape() {
+    fn test_unescape() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::unescape($input).unwrap(), $expected);
+                assert_eq!(unescape($input).unwrap(), $expected);
             };
         }
 

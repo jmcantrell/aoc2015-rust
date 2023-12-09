@@ -29,13 +29,17 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 
 #[cfg(test)]
 mod tests {
-    use crate::core::Direction::*;
+    use crate::core::Direction;
+
+    use super::*;
+
+    use Direction::*;
 
     #[test]
-    fn parse() {
+    fn test_parse() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::parse($input).unwrap(), Vec::from($expected));
+                assert_eq!(parse($input).unwrap(), Vec::from($expected));
             };
         }
 
@@ -43,6 +47,6 @@ mod tests {
         test!(">", [East]);
         test!("^>v<", [North, East, South, West]);
 
-        assert!(super::parse("^>x<v").is_err());
+        assert!(parse("^>x<v").is_err());
     }
 }

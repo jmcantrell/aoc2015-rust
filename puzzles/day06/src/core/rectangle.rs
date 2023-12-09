@@ -32,7 +32,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn iter() {
+    fn test_iter() {
         macro_rules! test {
             ($top_left:expr, $bottom_right:expr, $expected:expr) => {
                 assert_eq!(

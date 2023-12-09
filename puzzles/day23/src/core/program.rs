@@ -71,7 +71,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn example() {
+    fn test_example() {
         let mut program = Program::with_registers(
             &[
                 Instruction::Increment(0),

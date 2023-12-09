@@ -16,12 +16,14 @@ pub fn iter_partitions(n: usize, k: usize) -> impl Iterator<Item = Vec<usize>> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn iter_partitions() {
+    fn test_iter_partitions() {
         macro_rules! test {
             ($n:expr, $k:expr, $expected:expr) => {
                 assert_eq!(
-                    super::iter_partitions($n, $k).collect::<Vec<_>>(),
+                    iter_partitions($n, $k).collect::<Vec<_>>(),
                     $expected.into_iter().map(Vec::from).collect::<Vec<_>>()
                 );
             };
@@ -55,6 +57,6 @@ mod tests {
             ]
         );
 
-        dbg!(super::iter_partitions(100, 4).count());
+        dbg!(iter_partitions(100, 4).count());
     }
 }

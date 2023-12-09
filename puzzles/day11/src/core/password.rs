@@ -109,7 +109,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn password_display() {
+    fn test_password_display() {
         assert_eq!(
             Password::try_from("abcdefgh").unwrap().to_string(),
             "abcdefgh"
@@ -117,18 +117,18 @@ mod tests {
     }
 
     #[test]
-    fn password_ensures_len() {
+    fn test_password_ensures_len() {
         assert!(Password::try_from("abc").is_err());
         assert!(Password::try_from("abcdefghi").is_err());
     }
 
     #[test]
-    fn password_ensures_lowercase_letters() {
+    fn test_password_ensures_lowercase_letters() {
         assert!(Password::try_from("ABCDEFGH").is_err());
     }
 
     #[test]
-    fn password_iter_after() {
+    fn test_password_iter_after() {
         assert_eq!(
             PasswordIter::after(Password::try_from("aaaaaaaa").unwrap()).next(),
             Some(Password::try_from("aaaaaaab").unwrap())

@@ -31,12 +31,14 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 mod tests {
     use crate::core::Present;
 
+    use super::*;
+
     #[test]
-    fn parse() {
+    fn test_parse() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::parse($input).unwrap(),
+                    parse($input).unwrap(),
                     $expected.into_iter().map(Present::from).collect::<Vec<_>>()
                 );
             };

@@ -7,10 +7,10 @@ use crate::core::Location;
 
 pub type Parsed = Location;
 
-static RE: Lazy<Regex> =
-    lazy_regex!(r"\bEnter the code at row (?<row>\d+), column (?<column>\d+)\.");
-
 pub fn parse(input: Input) -> anyhow::Result<Parsed> {
+    static RE: Lazy<Regex> =
+        lazy_regex!(r"\bEnter the code at row (?<row>\d+), column (?<column>\d+)\.");
+
     let captures = RE
         .captures(input)
         .with_context(|| format!("expected input to match: {:?}", RE.as_str()))?;
@@ -25,11 +25,13 @@ pub fn parse(input: Input) -> anyhow::Result<Parsed> {
 mod tests {
     use aoc::Input;
 
+    use super::*;
+
     const INPUT: Input = include_str!("../../input.txt");
 
     #[test]
-    fn parse() -> anyhow::Result<()> {
-        dbg!(super::parse(INPUT)?);
+    fn test_parse() -> anyhow::Result<()> {
+        dbg!(parse(INPUT)?);
         Ok(())
     }
 }

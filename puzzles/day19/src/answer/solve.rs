@@ -43,6 +43,8 @@ mod tests {
 
     use crate::answer::{parse1, parse2};
 
+    use super::*;
+
     const INPUT1A: Input = include_str!("../../input-test1a.txt");
     const INPUT1B: Input = include_str!("../../input-test1b.txt");
 
@@ -50,16 +52,16 @@ mod tests {
     const INPUT2B: Input = include_str!("../../input-test2b.txt");
 
     #[test]
-    fn solve1() -> anyhow::Result<()> {
-        assert_eq!(super::solve1(&parse1(INPUT1A)?)?, 4);
-        assert_eq!(super::solve1(&parse1(INPUT1B)?)?, 7);
+    fn test_solve1() -> anyhow::Result<()> {
+        assert_eq!(solve1(&parse1(INPUT1A)?)?, 4);
+        assert_eq!(solve1(&parse1(INPUT1B)?)?, 7);
         Ok(())
     }
 
     #[test]
-    fn solve2() -> anyhow::Result<()> {
-        assert_eq!(super::solve2(&parse2(INPUT2A)?)?, 3);
-        assert_eq!(super::solve2(&parse2(INPUT2B)?)?, 6);
+    fn test_solve2() -> anyhow::Result<()> {
+        assert_eq!(solve2(&parse2(INPUT2A)?)?, 3);
+        assert_eq!(solve2(&parse2(INPUT2B)?)?, 6);
         Ok(())
     }
 }

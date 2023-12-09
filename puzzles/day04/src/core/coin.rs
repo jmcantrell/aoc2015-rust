@@ -12,12 +12,14 @@ pub fn find_salt(secret_key: &[u8], prefix_len: usize) -> Option<Salt> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn find_salt() {
+    fn test_find_salt() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::find_salt(&$input.as_bytes().to_vec(), 5).unwrap(),
+                    find_salt(&$input.as_bytes().to_vec(), 5).unwrap(),
                     $expected
                 );
             };

@@ -27,8 +27,10 @@ pub fn battle(player: &Character, boss: &Character) -> (Value, Value) {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn battle() {
-        assert_eq!(super::battle(&(8, 5, 5).into(), &(12, 7, 2).into()), (2, 0));
+    fn test_battle() {
+        assert_eq!(battle(&(8, 5, 5).into(), &(12, 7, 2).into()), (2, 0));
     }
 }

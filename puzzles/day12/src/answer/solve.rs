@@ -46,11 +46,13 @@ pub fn solve2(parsed: &Parsed2) -> anyhow::Result<Solution2> {
 mod tests {
     use crate::answer::{parse1, parse2};
 
+    use super::*;
+
     #[test]
-    fn solve1() {
+    fn test_solve1() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::solve1(&parse1($input).unwrap()).unwrap(), $expected);
+                assert_eq!(solve1(&parse1($input).unwrap()).unwrap(), $expected);
             };
         }
 
@@ -65,10 +67,10 @@ mod tests {
     }
 
     #[test]
-    fn solve2() {
+    fn test_solve2() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
-                assert_eq!(super::solve2(&parse2($input).unwrap()).unwrap(), $expected);
+                assert_eq!(solve2(&parse2($input).unwrap()).unwrap(), $expected);
             };
         }
 

@@ -69,7 +69,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn try_from_str() {
+    fn test_try_from_str() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(Source::try_from($input).unwrap(), $expected);

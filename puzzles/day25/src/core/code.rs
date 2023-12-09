@@ -12,9 +12,11 @@ pub fn iter_codes(start: Code) -> impl Iterator<Item = Code> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn iter_codes() {
-        let mut iter = super::iter_codes(20151125);
+    fn test_iter_codes() {
+        let mut iter = iter_codes(20151125);
 
         macro_rules! assert_next {
             ($expected:expr) => {

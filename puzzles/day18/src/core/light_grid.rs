@@ -171,7 +171,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn try_from_str() -> anyhow::Result<()> {
+    fn test_try_from_str() -> anyhow::Result<()> {
         assert_eq!(
             LightGrid::try_from(".#.#.#\n...##.\n#....#\n..#...\n#.#..#\n####..\n")?,
             LightGrid(dmatrix![
@@ -187,7 +187,7 @@ mod tests {
     }
 
     #[test]
-    fn animate() {
+    fn test_animate() {
         let grid = LightGrid::try_from(".#.#.#\n...##.\n#....#\n..#...\n#.#..#\n####..\n").unwrap();
         let mut frames = grid.animate(|cell, lit_neighbors| match cell.1 {
             true => lit_neighbors == 2 || lit_neighbors == 3,
@@ -207,7 +207,7 @@ mod tests {
     }
 
     #[test]
-    fn len_lit() {
+    fn test_len_lit() {
         assert_eq!(
             LightGrid::try_from(".#.#.#\n...##.\n#....#\n..#...\n#.#..#\n####..\n")
                 .unwrap()

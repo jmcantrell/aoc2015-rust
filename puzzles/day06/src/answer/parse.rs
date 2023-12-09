@@ -31,14 +31,16 @@ pub fn parse2(input: Input) -> anyhow::Result<Parsed2> {
 mod tests {
     use crate::core::{Action, Command, Rectangle};
 
+    use super::*;
+
     use Action::*;
 
     #[test]
-    fn parse() {
+    fn test_parse() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::parse($input).unwrap(),
+                    parse($input).unwrap(),
                     Vec::from($expected.map(|(action, top_left, bottom_right)| {
                         Command::new(action, Rectangle::new(top_left.into(), bottom_right.into()))
                     }))

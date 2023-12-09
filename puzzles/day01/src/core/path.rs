@@ -20,12 +20,14 @@ where
 mod tests {
     use crate::core::Direction::*;
 
+    use super::*;
+
     #[test]
-    fn iter_path() {
+    fn test_iter_path() {
         macro_rules! test {
             ($input:expr, $expected:expr) => {
                 assert_eq!(
-                    super::iter_path(&Vec::from($input)).collect::<Vec<_>>(),
+                    iter_path(&Vec::from($input)).collect::<Vec<_>>(),
                     Vec::from($expected)
                 );
             };
