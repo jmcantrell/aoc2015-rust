@@ -124,9 +124,7 @@ impl TryFrom<&str> for LightGrid {
         }
 
         let mut lines = s.lines().enumerate().peekable();
-        let (_, first_line) = lines.peek().context("no lines")?;
-
-        let width = first_line.len();
+        let width = lines.peek().context("empty input")?.len();
 
         let cells = lines
             .flat_map(|(i, s)| {
