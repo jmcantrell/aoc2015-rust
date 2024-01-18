@@ -123,10 +123,11 @@ impl TryFrom<&str> for LightGrid {
             }
         }
 
-        let mut lines = s.lines().enumerate().peekable();
+        let mut lines = s.lines().peekable();
         let width = lines.peek().context("empty input")?.len();
 
         let cells = lines
+            .enumerate()
             .flat_map(|(i, s)| {
                 s.chars().enumerate().map(move |(j, c)| {
                     parse_light(c)
