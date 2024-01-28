@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+day=${1:?missing day number}
+num_parts=${2:-2}
+
+template_dir=$PWD/templates/puzzle$num_parts
+
+if [[ ! -d $template_dir ]]; then
+    printf "%s: invalid template: %s\n" "$0" "${template_dir##*/}" >&2
+    exit 2
+fi
+
+printf -v name "day%02d" "$day"
+
+output_dir=$PWD/puzzles/$name
+
+if [[ -e $output_dir ]]; then
+    printf "%s: day %d already exists\n" "$0" "$day" >&2
+    exit 2
+fi
+
+mkdir -p "$(dirname "$output_dir")"
+cp -vr "$template_dir" "$output_dir"
+
+find "$output_dir" -type f -exec sed -i "s/__NAME__/$name/g" {} +
