@@ -13,7 +13,7 @@ type Solution = usize;
 pub type Solution1 = Solution;
 pub type Solution2 = Solution;
 
-const PARAMS: Input = include_str!("../../params.txt");
+const PARAMS: Input = include_str!("../../params");
 static DETECTION: Lazy<Profile> = Lazy::new(|| PARAMS.try_into().unwrap());
 
 pub fn solve1(parsed: &Parsed1) -> anyhow::Result<Solution1> {

@@ -27,7 +27,7 @@ mod tests {
 
     use super::*;
 
-    const INPUT: Input = include_str!("../../input.txt");
+    const INPUT: Input = include_str!("../../input");
 
     #[test]
     fn test_parse() -> anyhow::Result<()> {

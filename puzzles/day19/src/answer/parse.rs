@@ -44,11 +44,11 @@ mod tests {
 
     use super::*;
 
-    const INPUT1A: Input = include_str!("../../input-test1a.txt");
-    const INPUT1B: Input = include_str!("../../input-test1b.txt");
+    const INPUT1A: Input = include_str!("../../input-test1a");
+    const INPUT1B: Input = include_str!("../../input-test1b");
 
-    const INPUT2A: Input = include_str!("../../input-test2a.txt");
-    const INPUT2B: Input = include_str!("../../input-test2b.txt");
+    const INPUT2A: Input = include_str!("../../input-test2a");
+    const INPUT2B: Input = include_str!("../../input-test2b");
 
     #[test]
     fn test_parse1() -> anyhow::Result<()> {
